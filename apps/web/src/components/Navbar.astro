@@ -1,0 +1,49 @@
+---
+import { Library } from '@lucide/astro';
+---
+
+<nav class="sticky top-4 z-50 px-4 mb-8">
+  <div class="max-w-7xl mx-auto rounded-2xl bg-gray-900/60 backdrop-blur-xl border border-white/10 shadow-xl">
+    <div class="px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-20 items-center">
+        <div class="flex items-center">
+          <a href="/dashboard" class="group flex items-center gap-3">
+            <div class="p-2 bg-gradient-to-br from-primary-600 to-indigo-600 rounded-lg group-hover:shadow-lg group-hover:shadow-primary-500/20 transition-all duration-300">
+              <Library class="w-6 h-6 text-white" />
+            </div>
+            <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">LibraryOS</span>
+          </a>
+        </div>
+        
+        <div class="flex items-center space-x-2">
+          <a href="/dashboard" class="relative group px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:text-white text-gray-400 overflow-hidden">
+            <span class="relative z-10">Dashboard</span>
+            <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg"></div>
+          </a>
+          <a href="/penulis" class="relative group px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:text-white text-gray-400 overflow-hidden">
+             <span class="relative z-10">Penulis</span>
+             <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg"></div>
+          </a>
+          <a href="/buku" class="relative group px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:text-white text-gray-400 overflow-hidden">
+             <span class="relative z-10">Buku</span>
+             <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg"></div>
+          </a>
+          <div class="h-6 w-px bg-white/10 mx-2"></div>
+          <button 
+            id="logoutBtn"
+            class="group relative px-5 py-2.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-400 hover:text-red-300 transition-all text-sm font-medium border border-red-500/20"
+          >
+            Keluar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  document.getElementById('logoutBtn')?.addEventListener('click', () => {
+    localStorage.removeItem('token');
+    window.location.href = '/';
+  });
+</script>

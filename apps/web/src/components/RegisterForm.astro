@@ -1,0 +1,137 @@
+---
+import { Mail, Lock, Loader2, UserPlus } from '@lucide/astro';
+---
+
+<div id="register-form-container" class="relative group">
+  <div class="absolute -inset-0.5 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-200"></div>
+  
+  <div class="relative bg-gray-900/60 backdrop-blur-xl p-8 rounded-2xl border border-white/10 shadow-2xl w-full">
+    <div class="mb-8 text-center">
+      <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-400 mb-2">Create Account</h1>
+      <p class="text-gray-400 text-sm">Bergabunglah untuk mengakses perpustakaan</p>
+    </div>
+    
+    <form id="registerForm" class="space-y-6">
+      <div class="space-y-2">
+        <label class="block text-xs font-medium text-gray-400 uppercase tracking-wider ml-1">Email</label>
+        <div class="relative group/input">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500 group-focus-within/input:text-emerald-400 transition-colors">
+            <Mail class="w-5 h-5" />
+          </div>
+          <input 
+            type="email" 
+            name="email" 
+            required
+            class="block w-full pl-10 pr-3 py-3 bg-black/20 border border-white/10 rounded-xl text-gray-100 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all duration-300 sm:text-sm"
+            placeholder="nama@email.com"
+          />
+        </div>
+      </div>
+      
+      <div class="space-y-2">
+        <label class="block text-xs font-medium text-gray-400 uppercase tracking-wider ml-1">Password</label>
+        <div class="relative group/input">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500 group-focus-within/input:text-emerald-400 transition-colors">
+            <Lock class="w-5 h-5" />
+          </div>
+          <input 
+            type="password" 
+            name="password" 
+            required
+            minlength="6"
+            class="block w-full pl-10 pr-3 py-3 bg-black/20 border border-white/10 rounded-xl text-gray-100 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all duration-300 sm:text-sm"
+            placeholder="••••••••"
+          />
+        </div>
+      </div>
+      
+      <button 
+        type="submit"
+        class="w-full relative overflow-hidden bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-medium py-3 px-4 rounded-xl shadow-lg shadow-emerald-500/20 transform transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed group/btn"
+      >
+        <span class="relative z-10 flex items-center justify-center gap-2">
+          Buat Akun
+          <span id="btn-loader" class="hidden animate-spin">
+            <Loader2 class="w-4 h-4" />
+          </span>
+        </span>
+        <div class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></div>
+      </button>
+    </form>
+    
+    <div id="error-message" class="hidden mt-6 p-4 bg-red-500/10 border border-red-500/20 text-red-200 rounded-xl text-sm text-center animate-shake"></div>
+    <div id="success-message" class="hidden mt-6 p-4 bg-emerald-500/10 border border-emerald-500/20 text-emerald-200 rounded-xl text-sm text-center"></div>
+    
+    <p class="mt-8 text-center text-sm text-gray-500">
+      Sudah punya akun? 
+      <a href="/" class="text-emerald-400 hover:text-emerald-300 font-medium hover:underline transition-colors">Masuk</a>
+    </p>
+  </div>
+</div>
+
+<script>
+  const API_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:3001/api';
+  
+  document.getElementById('registerForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const loader = document.getElementById('btn-loader');
+    const formData = new FormData(form);
+    const errorDiv = document.getElementById('error-message');
+    const successDiv = document.getElementById('success-message');
+    
+    if (errorDiv) {
+        errorDiv.classList.add('hidden');
+        errorDiv.textContent = '';
+    }
+    if (submitBtn) submitBtn.disabled = true;
+    if (loader) loader.classList.remove('hidden');
+    
+    try {
+      const response = await fetch(`${API_URL}/auth/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: formData.get('email'),
+          password: formData.get('password'),
+        }),
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.message || 'Pendaftaran gagal');
+      }
+      
+      localStorage.setItem('token', data.access_token);
+      
+      if (successDiv) {
+        successDiv.textContent = 'Account created successfully! Redirecting...';
+        successDiv.classList.remove('hidden');
+      }
+      
+      setTimeout(() => {
+        window.location.href = '/dashboard';
+      }, 1500);
+    } catch (error: any) {
+      if (errorDiv) {
+        errorDiv.textContent = error.message;
+        errorDiv.classList.remove('hidden');
+      }
+      if (submitBtn) submitBtn.disabled = false;
+      if (loader) loader.classList.add('hidden');
+    }
+  });
+</script>
+
+<style>
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
+  .animate-shake {
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+  }
+</style>

@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LoginForm from '../components/LoginForm.astro';
+---
+
+<Layout title="Login - Library Management">
+  <main class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-950 p-4">
+    <div class="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-primary-600/30 rounded-full blur-[120px] mix-blend-screen opacity-50 animate-pulse"></div>
+    <div class="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-purple-600/30 rounded-full blur-[120px] mix-blend-screen opacity-50 animate-pulse" style="animation-delay: 2s;"></div>
+    
+    <div class="relative w-full max-w-md z-10">
+      <LoginForm />
+    </div>
+  </main>
+</Layout>
+
+<script>
+  if (localStorage.getItem('token')) {
+    window.location.href = '/dashboard';
+  }
+</script>
