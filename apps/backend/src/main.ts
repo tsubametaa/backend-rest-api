@@ -9,11 +9,13 @@ async function bootstrap() {
     origin: [
       'http://localhost:4321',
       'http://localhost:3000',
-      'https://backend-rest-api-backend.vercel.app/',
-      'https://backend-rest-api-web.vercel.app/',
+      'https://backend-rest-api-backend.vercel.app',
+      'https://backend-rest-api-web.vercel.app',
       process.env.FRONTEND_URL || '*',
     ],
     credentials: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    allowedHeaders: 'Content-Type,Authorization,Accept',
   });
 
   app.useGlobalPipes(
