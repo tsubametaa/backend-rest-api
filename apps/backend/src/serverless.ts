@@ -5,7 +5,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import express, { Request, Response } from 'express';
 
-let app: NestExpressApplication;
+// let app: NestExpressApplication;
 const server = express();
 
 async function createNestServer(expressInstance: express.Express) {
@@ -20,6 +20,7 @@ async function createNestServer(expressInstance: express.Express) {
     origin: [
       'http://localhost:4321',
       'http://localhost:3000',
+      'https://backend-rest-api-backend.vercel.app/',
       process.env.FRONTEND_URL || '*',
     ],
     credentials: true,
