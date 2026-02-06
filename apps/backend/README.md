@@ -21,11 +21,21 @@ f) Saya memilih Layered Architecture karena memisahkan tugas masing-masing denga
 Backend dengan NestJS, Supabase, JWT Auth, dan E2E Testing
 Web App dengan Astro, dan TailwindCSS
 
+# Untuk mencobanya bisa melalui link berikut :
+
+View API :
+https://uta-dot-api.vercel.app
+
+View WebApp (untuk ujicoba manual):
+https://uta-dot-challenge.vercel.app
+
 Untuk login bisa menggunakan akun berikut :
 Email: admin@uta.id
 Pass : Admin123
 
 Atau bisa daftar akun baru juga untuk uji cobanya.
+
+Untuk testing e2e bisa menjalankan perintah berikut di terminal :
 
 ```bash
 cd apps/backend; npm run test:e2e
