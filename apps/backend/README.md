@@ -40,3 +40,6 @@ Untuk testing e2e bisa menjalankan perintah berikut di terminal :
 ```bash
 cd apps/backend; npm run test:e2e
 ```
+
+Video Penjelasan Backend REST API : https://www.loom.com/share/1b23ab4e811f43b8a7f57b509e1e6672
+Video Penjelasan Frontend e2e Testing dengan cypress : https://www.loom.com/share/a22ca74a29644f17919ed53832d67bb6
