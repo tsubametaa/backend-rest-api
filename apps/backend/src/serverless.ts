@@ -5,7 +5,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import express, { Request, Response } from 'express';
 
-// let app: NestExpressApplication;
+let app: NestExpressApplication;
 const server = express();
 
 async function createNestServer(expressInstance: express.Express) {
