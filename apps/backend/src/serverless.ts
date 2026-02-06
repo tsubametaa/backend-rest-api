@@ -34,7 +34,9 @@ async function createNestServer(expressInstance: express.Express) {
     }),
   );
 
-  app.setGlobalPrefix('api');
+  app.setGlobalPrefix('api', {
+    exclude: ['/'],
+  });
 
   await app.init();
   return app;
