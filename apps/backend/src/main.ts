@@ -10,6 +10,7 @@ async function bootstrap() {
       'http://localhost:4321',
       'http://localhost:3000',
       'https://backend-rest-api-backend.vercel.app/',
+      'https://backend-rest-api-web.vercel.app/',
       process.env.FRONTEND_URL || '*',
     ],
     credentials: true,
