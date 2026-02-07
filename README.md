@@ -18,18 +18,28 @@ Alvin Ferina Putra
 
 # Perpustakaan API by @tsubametaa/Alvin
 
-Backend dengan NestJS, Supabase, JWT Auth, dan E2E Testing
-Web App dengan Astro, dan TailwindCSS
+- Backend dengan NestJS, Supabase, JWT Auth, dan E2E Testing
+- Web App dengan Astro, dan TailwindCSS
 
-Untuk login bisa menggunakan akun berikut :
-Email: admin@uta.id
-Pass : Admin123
+# Untuk mencobanya bisa melalui link berikut :
 
-Atau bisa daftar akun baru juga untuk uji cobanya.
+- View API :
+- https://backend-rest-api-backend.vercel.app/
+
+- View WebApp (untuk ujicoba manual):
+- https://backend-rest-api-web.vercel.app/
+
+- Untuk login bisa menggunakan akun berikut :
+- Email: admin@uta.id
+- Pass : Admin123
+
+- Atau bisa daftar akun baru juga untuk uji cobanya.
+
+- Untuk testing e2e bisa menjalankan perintah berikut di terminal :
 
 ```bash
 cd apps/backend; npm run test:e2e
 ```
 
-Video Penjelasan Backend REST API : https://www.loom.com/share/1b23ab4e811f43b8a7f57b509e1e6672
-Video Penjelasan Frontend e2e Testing dengan cypress : https://www.loom.com/share/a22ca74a29644f17919ed53832d67bb6
+- Video Penjelasan Backend REST API : https://www.loom.com/share/1b23ab4e811f43b8a7f57b509e1e6672
+- Video Penjelasan Frontend e2e Testing dengan cypress : https://www.loom.com/share/a22ca74a29644f17919ed53832d67bb6
