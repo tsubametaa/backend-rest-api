@@ -1,5 +1,5 @@
 ---
-import { Mail, Lock, Loader2, UserPlus } from '@lucide/astro';
+import { Mail, Lock, Loader2, UserPlus, Eye, EyeOff } from '@lucide/astro';
 ---
 
 <div id="register-form-container" class="relative group">
@@ -37,11 +37,16 @@ import { Mail, Lock, Loader2, UserPlus } from '@lucide/astro';
           <input 
             type="password" 
             name="password" 
+            id="registerPassword"
             required
             minlength="6"
-            class="block w-full pl-10 pr-3 py-3 bg-black/20 border border-white/10 rounded-xl text-gray-100 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all duration-300 sm:text-sm"
+            class="block w-full pl-10 pr-10 py-3 bg-black/20 border border-white/10 rounded-xl text-gray-100 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all duration-300 sm:text-sm"
             placeholder="••••••••"
           />
+          <button type="button" id="toggleRegisterPassword" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-emerald-400 transition-colors focus:outline-none">
+            <Eye class="w-5 h-5" id="registerEyeIcon" />
+            <EyeOff class="w-5 h-5 hidden" id="registerEyeOffIcon" />
+          </button>
         </div>
       </div>
       
@@ -122,6 +127,19 @@ import { Mail, Lock, Loader2, UserPlus } from '@lucide/astro';
       if (submitBtn) submitBtn.disabled = false;
       if (loader) loader.classList.add('hidden');
     }
+  });
+
+  const toggleRegisterPasswordBtn = document.getElementById('toggleRegisterPassword');
+  const registerPasswordInput = document.getElementById('registerPassword') as HTMLInputElement;
+  const registerEyeIcon = document.getElementById('registerEyeIcon');
+  const registerEyeOffIcon = document.getElementById('registerEyeOffIcon');
+
+  toggleRegisterPasswordBtn?.addEventListener('click', () => {
+    const type = registerPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    registerPasswordInput.setAttribute('type', type);
+    
+    registerEyeIcon?.classList.toggle('hidden');
+    registerEyeOffIcon?.classList.toggle('hidden');
   });
 </script>
 
